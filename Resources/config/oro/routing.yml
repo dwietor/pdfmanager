@@ -1,0 +1,19 @@
+d_wietor_p_manager:
+    resource: "@DWietorPmanagerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+d_wietor_p_manager_frontend:
+    resource: "@DWietorPmanagerBundle/Controller/Frontend/"
+    type:     annotation
+    prefix:   /
+    options:
+        frontend: true
+d_wietor_pmanager_bundle_api:
+    resource:     "@DWietorPmanagerBundle/Resources/config/oro/routing_api.yml"
+    type:         rest
+    prefix:       api/rest/{version}
+    requirements:
+        version:  latest|v1
+        _format:  json
+    defaults:
+        version:  latest

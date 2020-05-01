@@ -1,0 +1,24 @@
+navigation:
+    menu_config:
+        items:
+            pmanager_tab:
+                label: 'dwietor.pmanager.entity_label'  
+                uri:   '#'
+                extras:
+                    position: 50
+            pmanager_tab_template:
+                label: 'dwietor.pmanager.entity_template_plural_label'
+                route: pmanager_template_index
+                extras:
+                    routes: ['/^d_wietor_pmanager_*/']
+                    description: 'dwietor.pmanager.menu.template_list.description'
+        tree:
+            application_menu:
+                children:
+                    system_tab:
+                        children:
+                            pmanager_tab:
+                                children:
+                                    pmanager_tab_template: ~
+    titles:
+        pmanager_template_index:    ~

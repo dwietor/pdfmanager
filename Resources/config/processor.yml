@@ -1,0 +1,7 @@
+parameters:
+    d_wietor_pmanager.processor.registry.class: DWietor\Bundle\PmanagerBundle\Processor\ProcessorRegistry
+
+services:
+    # Processor registry
+    d_wietor_pmanager.processor.registry:
+        class: %d_wietor_pmanager.processor.registry.class%

@@ -1,0 +1,131 @@
+parameters:
+    d_wietor_pmanager.form.subscriber.pdftemplate.class:        DWietor\Bundle\PmanagerBundle\Form\EventListener\BuildTemplateFormSubscriber
+    d_wietor_pmanager.form.type.pdftemplate.class:              DWietor\Bundle\PmanagerBundle\Form\Type\PDFTemplateType
+    d_wietor_pmanager.form.type.producttemplate.class:              DWietor\Bundle\PmanagerBundle\Form\Type\ProductTemplateType
+    d_wietor_pmanager.form.type.publication.class:              DWietor\Bundle\PmanagerBundle\Form\Type\PublicationType
+    d_wietor_pmanager.form.type.pdftemplate_select.class:       DWietor\Bundle\PmanagerBundle\Form\Type\PDFTemplateSelectType
+    d_wietor_pmanager.form.type.frontendpdftemplate_select.class:       DWietor\Bundle\PmanagerBundle\Form\Type\FrontendPDFTemplateSelectType
+    d_wietor_pmanager.form.type.pdftemplate_translation.class:  DWietor\Bundle\PmanagerBundle\Form\Type\PDFTemplateTranslationType
+    d_wietor_pmanager.form.handler.pdftemplate.class:           DWietor\Bundle\PmanagerBundle\Form\Handler\PDFTemplateHandler
+    d_wietor_pmanager.form.handler.producttemplate.class:           DWietor\Bundle\PmanagerBundle\Form\Handler\ProductTemplateHandler
+    d_wietor_pmanager.form.handler.publication.class:           DWietor\Bundle\PmanagerBundle\Form\Handler\PublicationHandler
+    d_wietor_pmanager.form.handler.exportpdf.class:             DWietor\Bundle\PmanagerBundle\Form\Handler\ExportPDFHandler
+    d_wietor_pmanager.form.type.pdftemplate.api.class:          DWietor\Bundle\PmanagerBundle\Form\Type\PDFTemplateApiType
+    d_wietor_pmanager.form.type.producttemplate.api.class:          DWietor\Bundle\PmanagerBundle\Form\Type\ProductTemplateApiType
+    d_wietor_pmanager.form.type.exportpdf.class:                DWietor\Bundle\PmanagerBundle\Form\Type\ExportPDFType
+    d_wietor_pmanager.form.repository.pdftemplate.class:        DWietor\Bundle\PmanagerBundle\Entity\Repository\PDFTemplateRepository
+    d_wietor_pmanager.form.type.update.pdftemplate_select.class:  DWietor\Bundle\PmanagerBundle\Form\Type\PDFTemplateUpdateSelectType
+services:
+    d_wietor_pmanager.form.type.pdftemplate.api:
+        class: %d_wietor_pmanager.form.type.pdftemplate.api.class%
+        arguments:
+            - @oro_config.user
+            - @oro_locale.settings
+    d_wietor_pmanager.form.type.producttemplate.api:
+        class: %d_wietor_pmanager.form.type.producttemplate.api.class%
+        arguments:
+            - @oro_config.user
+            - @oro_locale.settings
+    d_wietor_pmanager.form.subscriber.pdftemplate:
+        class: %d_wietor_pmanager.form.subscriber.pdftemplate.class%
+        arguments:
+            - @security.context
+
+    d_wietor_pmanager.form.pdftemplate:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments: ["d_wietor_pmanager_pdftemplate", "d_wietor_pmanager_pdftemplate", null]
+
+    d_wietor_pmanager.form.publication:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments: ["d_wietor_pmanager_publication", "d_wietor_pmanager_publication", null]
+        
+    d_wietor_pmanager.form.producttemplate:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments: ["d_wietor_pmanager_producttemplate", "d_wietor_pmanager_producttemplate", null]
+        
+    d_wietor_pmanager.form.type.pdftemplate:
+        class: %d_wietor_pmanager.form.type.pdftemplate.class%
+        arguments:
+            - @oro_config.user
+            - @oro_locale.settings
+        tags:
+            - { name: form.type, alias: d_wietor_pmanager_pdftemplate }
+            
+    d_wietor_pmanager.form.type.producttemplate:
+        class: %d_wietor_pmanager.form.type.producttemplate.class%
+        arguments:
+            - @oro_config.user
+            - @oro_locale.settings
+        tags:
+            - { name: form.type, alias: d_wietor_pmanager_producttemplate }
+            
+    d_wietor_pmanager.form.type.publication:
+        class: %d_wietor_pmanager.form.type.publication.class%
+        arguments:
+            - @oro_config.user
+            - @oro_locale.settings
+        tags:
+            - { name: form.type, alias: d_wietor_pmanager_publication }
+            
+
+    d_wietor_pmanager.form.type.pdftemplate_translation:
+        class: %d_wietor_pmanager.form.type.pdftemplate_translation.class%
+        arguments:
+            - @oro_config.user
+        tags:
+            - { name: form.type, alias: d_wietor_pmanager_pdftemplate_translatation }
+
+    d_wietor_pmanager.form.type.pdftemplate_select:
+        class: %d_wietor_pmanager.form.type.pdftemplate_select.class%
+        tags:
+            - { name: form.type, alias: d_wietor_pmanager_pdftemplate_list }
+
+    d_wietor_pmanager.form.type.frontendpdftemplate_select:
+        class: %d_wietor_pmanager.form.type.frontendpdftemplate_select.class%
+        arguments:
+            - @security.context
+            - @d_wietor_pmanager.form.repository.pdftemplate
+        tags:
+            - { name: form.type, alias: d_wietor_pmanager_frontendpdftemplate_list }
+            
+    d_wietor_pmanager.form.type.update.pdftemplate_select:
+        class: %d_wietor_pmanager.form.type.update.pdftemplate_select.class%
+        tags:
+            - { name: form.type, alias: d_wietor_pmanager_pdftemplate_update_list }
+            
+    d_wietor_pmanager.form.handler.pdftemplate:
+        class: %d_wietor_pmanager.form.handler.pdftemplate.class%
+        scope: request
+        arguments:
+            - @d_wietor_pmanager.form.pdftemplate  
+            - @request
+            - @doctrine.orm.entity_manager
+            - @translator          
+            
+    d_wietor_pmanager.form.handler.exportpdf:
+        class: %d_wietor_pmanager.form.handler.exportpdf.class%
+        scope: request
+        arguments: 
+            - @request
+            - @d_wietor_pmanager.form.repository.pdftemplate
+    d_wietor_pmanager.form.repository.pdftemplate:
+        class: %d_wietor_pmanager.form.repository.pdftemplate.class%
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - DWietor\Bundle\PmanagerBundle\Entity\PDFTemplate
+    d_wietor_pmanager.form.type.exportpdf:
+        class: %d_wietor_pmanager.form.type.exportpdf.class%
+        arguments:
+            - @security.context
+            - @request_stack
+        tags:
+            - { name: form.type, alias: d_wietor_pmanager_exportpdf }
+        calls:
+            - [setFrontendHelper,["@oro_frontend.request.frontend_helper"]]

@@ -1,0 +1,9 @@
+parameters:
+    d_wietor_pmanager.extension.action.type.getpdf.class:    DWietor\Bundle\PmanagerBundle\Extension\Action\Actions\GetpdfAction 
+
+services:
+    d_wietor_pmanager.extension.action.type.getpdf:
+        class: %d_wietor_pmanager.extension.action.type.getpdf.class%
+        scope: prototype
+        tags:
+            - { name: oro_datagrid.extension.action.type, type: getpdf }

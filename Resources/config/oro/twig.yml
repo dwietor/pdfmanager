@@ -1,0 +1,2 @@
+bundles:
+    - DWietorPmanagerBundle:Form:fields.html.twig

@@ -1,0 +1,10 @@
+placeholders:
+    items:
+        d_wietor_pmanager_add_button:
+            template: DWietorPmanagerBundle:Pmanager:activityButton.html.twig
+            applicable: @d_wietor_pmanager.placeholder.filter->isApplicable($entity$)
+            acl: pmanager_defaut_createview
+        d_wietor_pmanager_add_link:
+            template: DWietorPmanagerBundle:Pmanager:activityLink.html.twig
+            applicable: @d_wietor_pmanager.placeholder.filter->isApplicable($entity$)
+            acl: pmanager_defaut_createview

@@ -1,0 +1,131 @@
+system_configuration:
+    groups:
+        pdf_manager:
+            title: dwietor.pmanager.system_configuration.groups.title
+        pdf_manager_setting:
+            title: dwietor.pmanager.system_configuration.groups.settings.title
+            icon:  'fa-file'
+        pdf_manager_view:
+            title: dwietor.pmanager.system_configuration.groups.view.title
+        pdf_manager_frontend:
+            title: dwietor.pmanager.system_configuration.groups.frontend.title
+    fields:
+        d_wietor_pmanager.allow:
+            data_type: array
+            type: oro_entity_choice
+            priority: 70
+            options:
+                label: dwietor.pmanager.system_configuration.fields.allow.label
+                multiple: true
+                constraints:
+                    - NotBlank: ~
+        d_wietor_pmanager.logo:
+            data_type: string
+            type: 'Oro\Bundle\ConfigBundle\Form\Type\ConfigFileType'
+            priority: 60
+            options:
+                label: dwietor.pmanager.system_configuration.fields.logo.label
+                resettable: false
+                required: false
+                fileConstraints:
+                    - Image: ~
+        d_wietor_pmanager.logosize:
+            data_type: integer
+            type: 'Symfony\Component\Form\Extension\Core\Type\IntegerType'
+            priority: 50
+            options:
+                label: dwietor.pmanager.system_configuration.fields.logosize.label
+                constraints:
+                    - NotBlank: ~
+                    - Range:
+                        min: 1
+                        max: 400
+        d_wietor_pmanager.textheader:
+            data_type: string
+            type: textarea
+            priority: 40
+            options:
+                required: false
+                label: dwietor.pmanager.system_configuration.fields.textheader.label
+        d_wietor_pmanager.titleheader:
+            data_type: string
+            type: text
+            priority: 30
+            options:
+                required: false
+                label: dwietor.pmanager.system_configuration.fields.titleheader.label
+        d_wietor_pmanager.marginheader:
+            data_type: integer
+            type: 'Symfony\Component\Form\Extension\Core\Type\IntegerType'
+            priority: 20
+            options:
+                label: dwietor.pmanager.system_configuration.fields.marginheader.label
+                constraints:
+                    - NotBlank: ~
+                    - Range:
+                        min: 1
+        d_wietor_pmanager.marginfooter:
+            data_type: integer
+            type: 'Symfony\Component\Form\Extension\Core\Type\IntegerType'
+            priority: 10
+            options:
+                label: dwietor.pmanager.system_configuration.fields.marginfooter.label
+                constraints:
+                    - NotBlank: ~
+                    - Range:
+                        min: 1
+        d_wietor_pmanager.enablemultitemplate:
+            data_type: integer
+            type: 'Symfony\Component\Form\Extension\Core\Type\ChoiceType'
+            priority: 5
+            options:
+                label: dwietor.pmanager.system_configuration.fields.enablemultitemplate.label
+                required: false
+                choices:
+                    0: dwietor.pmanager.system_configuration.fields.enablemultitemplate.no.label
+                    1: dwietor.pmanager.system_configuration.fields.enablemultitemplate.yes.label
+        d_wietor_pmanager.defaultordertemplate:
+            data_type: string
+            type: 'd_wietor_pmanager_frontendpdftemplate_list'
+            priority: 4
+            options:
+                label: dwietor.pmanager.system_configuration.fields.defaultordertemplate.label
+                attr:
+                    classPassed: Oro\Bundle\OrderBundle\Entity\Order
+                constraints:
+                    - NotBlank: ~  
+        d_wietor_pmanager.defaultquotetemplate:
+            data_type: string
+            type: 'd_wietor_pmanager_frontendpdftemplate_list'
+            priority: 4
+            options:
+                label: dwietor.pmanager.system_configuration.fields.defaultquotetemplate.label
+                attr:
+                    classPassed: Oro\Bundle\SaleBundle\Entity\Quote
+                constraints:
+                    - NotBlank: ~ 
+    tree:
+        system_configuration:
+            platform:
+                children:
+                    general_setup:
+                        children:
+                            pdf_manager_setting:
+                                priority: 400
+                                children:
+                                    pdf_manager_view:
+                                        priority: 600
+                                        children:
+                                            - d_wietor_pmanager.allow
+                                            - d_wietor_pmanager.logo
+                                            - d_wietor_pmanager.logosize
+                                            - d_wietor_pmanager.titleheader
+                                            - d_wietor_pmanager.textheader
+                                            - d_wietor_pmanager.marginheader
+                                            - d_wietor_pmanager.marginfooter
+                                    pdf_manager_frontend:
+                                        priority: 500
+                                        children:
+                                            - d_wietor_pmanager.enablemultitemplate
+                                            - d_wietor_pmanager.defaultordertemplate
+                                            - d_wietor_pmanager.defaultquotetemplate
