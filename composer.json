@@ -1,0 +1,26 @@
+{
+    "name": "dwietor/pdfmanager",
+    "description": "DWietor PDF Manager for OroCommerce",
+    "homepage": "https://github.com/taymiya/orocommerce.git",
+    "license": "OSL-3.0",
+    "authors": [{
+        "name": "DWietor",
+        "homepage": "http://www.atypicaltechnologies.com"
+    }],
+    "autoload": {
+        "psr-0": {
+            "DWietor\\Bundle\\PmanagerBundle": "src/"
+        }
+    },
+    "target-dir": "src/DWietor/Bundle/PmanagerBundle",
+    "require": {
+        "php": ">=5.4.9"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    }
+}
